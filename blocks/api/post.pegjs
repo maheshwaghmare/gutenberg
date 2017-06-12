@@ -23,7 +23,7 @@ WP_Block_List
 
 WP_Block
   = WP_Block_Void
-  = WP_Block_Balanced
+  / WP_Block_Balanced
   / WP_Block_P_Text
 
 WP_Block_Void
@@ -44,7 +44,7 @@ WP_Block_P_Text
   } }
 
 WP_Block_Balanced
-  = s:WP_Block_Start ts:(!WP_Block_End c:Any { return c })* e:WP_Block_End & { return s.blockName === e.blockName }
+  = s:WP_Block_Start ts:(!WP_Block_End c:. { return c })* e:WP_Block_End & { return s.blockName === e.blockName }
   { return {
     blockName: s.blockName,
     attrs: s.attrs,
